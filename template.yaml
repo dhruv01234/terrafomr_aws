@@ -1,0 +1,38 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: CloudFormation template to create an IAM policy with full access to AWS Lambda
+
+Resources:
+
+  LambdaFullTestPolicy:
+    Type: AWS::IAM::Policy
+    Properties:
+      PolicyName: lambdaFullTestPolicy
+      PolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Action:
+              - lambda:*
+              - cloudwatch:*
+              - logs:*
+              - iam:PassRole
+            Resource: '*'
+      Roles:
+        - !Ref LambdaExecutionRole
+
+  LambdaExecutionRole:
+    Type: AWS::IAM::Role
+    Properties:
+      RoleName: LambdaExecutionRole
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: lambda.amazonaws.com
+            Action: sts:AssumeRole
+
+Outputs:
+  PolicyArn:
+    Description: ARN of the IAM policy
+    Value: !Ref LambdaFullTestPolicy
