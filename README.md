@@ -1,8 +1,3 @@
-# Creating the content for the README.md file explaining the Terraform setup
-
-readme_content = """
-# Terraform Setup for IAM Policy
-
 This repository contains a Terraform configuration to create a restricted IAM policy for managing AWS resources like CloudFormation, CloudWatch Logs, Lambda, API Gateway, and Serverless applications.
 
 ## Prerequisites
